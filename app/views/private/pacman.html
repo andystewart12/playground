@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="pacman.css">
+
+<script src="pacman.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#frame').html(render());
+        printCharacters();
+    });
+    document.onkeydown = startgame;
+    var gamerunning = false;
+    function startgame(event) {
+        var k = event.keyCode;
+        if (k >= 37 && k <= 40) {
+            if (!gamerunning) {
+                gamerunning = true;
+                setpacdirection(event);
+                $('#resetbutton').show();
+                printCharacters();
+                document.onkeydown = setpacdirection;
+                interval = setInterval(gameloop, 15);
+            }
+        }
+        
+    }
+    function resetgame() {
+        gamerunning = false;
+        $('#resetbutton').hide();
+        document.onkeydown = startgame;
+        reset();
+        printCharacters();
+    }
+
+</script>
+
+<div class="row" style="padding-top:20px;">
+    <div class="small-8 small-offset-2 columns end">
+        <div class="pc_container" id="container" onclick="startgame()">
+            <div class="pc_frame" id ="frame"></div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="small-8 small-offset-2 columns end">
+        <input class="button pc_stopbutton" type="button" id="resetbutton" value="Reset" onclick="resetgame()" style="display:none;"/>
+    </div>
+</div>

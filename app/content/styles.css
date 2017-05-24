@@ -1,0 +1,42 @@
+/* Top bar - override foundation css */
+.top-bar,
+.top-bar ul {
+  background-color: whitesmoke;
+}
+.top-bar {
+  padding: 0;
+}
+#mobileTopNav {
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+#mobileTopNav li {
+  list-style: none;
+  padding: 0.4rem;
+}
+.menu > li > a {
+  padding-top: .9rem;
+  padding-bottom: .9rem;
+  padding-left: 1.25rem;
+  padding-right: 1.35rem;
+  color: black;
+  
+  font-size: 90%;
+  border-bottom: 2px solid whitesmoke;
+}
+.menu > li > a:hover {
+  background-color: #eaeaea;
+  color: #000000;
+  border-bottom: 2px solid steelblue;
+}
+.menu .active > a {
+  background: whitesmoke;
+  border-bottom: 2px solid steelblue;
+  color: black;
+}
+
+.top-bar {
+  -webkit-box-shadow: 0 2px 4px 0 #c8c8c8;
+  -moz-box-shadow: 0 2px 4px 0 #c8c8c8;
+  box-shadow: 0 2px 4px 0 #c8c8c8;
+}

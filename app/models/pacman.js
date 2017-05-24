@@ -1,0 +1,486 @@
+var maze = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0],
+    [0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0],
+    [0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0],
+    [0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0],
+    [0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0],
+    [0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0],
+    [0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 1, 1, 1, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 1, 1, 1, 1, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0],
+    [0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0],
+    [0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0],
+    [0, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 0],
+    [0, 0, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0],
+    [0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0],
+    [0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0],
+    [0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+];
+
+var dotsnumber = 0;
+
+var pac = { position: { row: 17*20, col: 12*20 }, direction: { act: null, req: null}, speed: 2.5};
+
+var ghost0 = { position: { row: 10*20, col: 11*20}, direction: { act: 'up', pref: [null, null, null, null], favour: [0,1,2,3]}, speed: 2};
+var ghost1 = { position: { row: 10*20, col: 13*20}, direction: { act: 'up', pref: [null, null, null, null], favour: [0,2,3,1]}, speed: 2};
+var ghost2 = { position: { row: 10*20, col: 10*20}, direction: { act: 'up', pref: [null, null, null, null], favour: [0,2,1,3]}, speed: 2};
+var ghost3 = { position: { row: 10*20, col: 14*20}, direction: { act: 'up', pref: [null, null, null, null], favour: [0,1,3,2]}, speed: 2};
+
+var ghosts = [ ghost0, ghost1, ghost2, ghost3 ];
+var ghoststarts = [ {row: 10*20, col: 11*20}, {row:10*20, col:13*20}, {row: 10*20, col: 10*20}, {row: 10*20, col: 14*20}];
+
+var startpacposition = { row: 17*20, col: 12*20 };
+
+interval = null;
+
+function reset() {
+    dotsnumber = 0;
+    pac.position.row = startpacposition.row;
+    pac.position.col = startpacposition.col;
+    ghosts.forEach(function(ghost, index) {
+        ghost.position.row = ghoststarts[index].row;
+        ghost.position.col = ghoststarts[index].col;
+    });
+    pac.direction = { act: null, req: null };
+    clearInterval(interval);
+    $('#frame').html(render());
+}
+
+function gameover() {
+    clearInterval(interval);
+}
+
+function gameloop() {
+    
+    switch (pac.direction.req) {
+        case 'left':
+            if (tryleft(pac.position)) {
+                pac.direction.act = 'left';
+            }
+            break;
+        case 'right':
+            if (tryright(pac.position)) {
+                pac.direction.act = 'right';
+            }
+            break;
+        case 'up':
+            if (tryup(pac.position)) {
+                pac.direction.act = 'up';
+            }
+            break;
+        case 'down':
+            if (trydown(pac.position)) {
+                pac.direction.act = 'down';
+            }
+            break;
+    }
+    
+    switch (pac.direction.act) {
+        case 'left':
+            left(pac.position, pac.speed);
+            break;
+        case 'right':
+            right(pac.position, pac.speed);
+            break;
+        case 'up':
+            up(pac.position, pac.speed);
+            break;
+        case 'down':
+            down(pac.position, pac.speed);
+            break;
+    }
+
+    var collision = false;
+
+    ghosts.forEach(function(ghost) {
+        setghostdirection(ghost);
+        moveghost(ghost);
+        if (Math.floor(pac.position.row/20) == Math.floor(ghost.position.row/20) && Math.floor(pac.position.col/20) == Math.floor(ghost.position.col/20)) {
+            collision = true;
+        }
+    });
+
+    printCharacters();
+    if (collision) {
+        gameover();
+    }
+    
+    if (dotsnumber==0) {
+        gameover();
+    }
+}
+
+function setpacdirection(event) {
+    switch (event.keyCode) {
+        case 37:
+            pac.direction.req = 'left';
+            break;
+        case 39: 
+            pac.direction.req = 'right';
+            break;
+        case 38: 
+            pac.direction.req = 'up';
+            break;
+        case 40:
+            pac.direction.req = 'down';
+            break;
+    }
+}
+
+function removeCharacters() {
+    $('#r' + pac.position.row + 'c' + pac.position.col).removeClass().addClass('pc_node');
+    ghosts.forEach(function(ghost) {
+        $('#r' + ghost.position.row + 'c' + ghost.position.col).removeClass().addClass('pc_node');
+        $('#r' + ghost.position.row + 'c' + ghost.position.col).children().show();
+    });
+}
+
+function printCharacters() {
+
+    $('#pac').css({ 'top': pac.position.row + 'px', 'left': pac.position.col + 'px'})
+
+    if ($('#r' + Math.floor(pac.position.row/20) + 'c' + Math.floor(pac.position.col/20)).find('.pc_dot').length!=0) {
+        if (pac.position.row%20==0 && pac.position.col%20==0) {
+            dotsnumber --;
+            $('#r' + Math.floor(pac.position.row/20) + 'c' + Math.floor(pac.position.col/20)).empty();
+        }
+    }
+    ghosts.forEach(function(ghost, index) {
+        $('#ghost' + index).css({ 'top': ghost.position.row + 'px', 'left': ghost.position.col + 'px'});
+    });
+    
+}
+
+function left(pos, speed) {
+    var row = Math.floor(pos.row/20);
+    var col = Math.floor(pos.col/20);
+    if ((pos.row % 20 != 0) || (pos.col % 20 == 0 && maze[row][col-1]==0)) {
+        return false;
+    }
+
+    if (pos.col < 0) {
+        pos.col = maze[row].length*20 + pos.col;
+    } else {
+        pos.col -= speed;
+    }
+    return true;
+}
+function right(pos, speed) {
+    var row = Math.floor(pos.row/20);
+    var col = Math.floor(pos.col/20);
+    if ((pos.row % 20 != 0) || (pos.col % 20 == 0 && maze[row][col+1]==0)) {
+        return false;
+    }
+    if (pos.col >= maze[0].length*20) {
+        pos.col = pos.col - maze[0].length*20;
+    } else {
+        pos.col += speed;
+    }
+    return true;
+}
+function up(pos, speed) {
+    var row = Math.floor(pos.row/20);
+    var col = Math.floor(pos.col/20);
+    if ((pos.col % 20 != 0) || (pos.row % 20 == 0 && row!=0 && maze[row-1][col]==0)) {
+        return false;
+    }
+    if (pos.row < 0) {
+        pos.row = (maze.length*20) + pos.row;
+    } else {
+        pos.row -= speed;
+    }
+    return true;
+}
+function down(pos, speed) {
+    var row = Math.floor(pos.row/20);
+    var col = Math.floor(pos.col/20);
+    if ((pos.col % 20 != 0) || (pos.row % 20 == 0 && row<maze.length-1 && maze[row+1][col]==0)) {
+        return false;
+    }
+    if (pos.row >= maze.length*20) {
+        pos.row = pos.row - maze.length*20;
+    } else {
+        pos.row += speed;
+    }
+    return true;
+}
+
+function tryleft(pos) {
+    var row = Math.floor(pos.row/20);
+    var col = Math.floor(pos.col/20);
+    if (row==-1 || row==maze.length) {
+        return false;
+    }
+    if ((pos.row % 20 != 0) || (pos.col % 20 == 0 && maze[row][col-1]==0)) {
+        return false;
+    }
+    return true;
+}
+function tryright(pos) {
+    var row = Math.floor(pos.row/20);
+    var col = Math.floor(pos.col/20);
+    if (row==-1 || row==maze.length) {
+        return false;
+    }
+    if ((pos.row % 20 != 0) || (pos.col % 20 == 0 && maze[row][col+1]==0)) {
+        return false;
+    }
+    return true;
+}
+function tryup(pos) {
+    var row = Math.floor(pos.row/20);
+    var col = Math.floor(pos.col/20);
+    if (col==-1 || col==maze[0].length) {
+        return false;
+    }
+    if ((pos.col % 20 != 0) || (pos.row % 20 == 0 && row!=0 && maze[row-1][col]==0)) {
+        return false;
+    }
+    return true;
+}
+function trydown(pos) {
+    var row = Math.floor(pos.row/20);
+    var col = Math.floor(pos.col/20);
+    if (col==-1 || col==maze[0].length) {
+        return false;
+    }
+    if ((pos.col % 20 != 0) || (pos.row % 20 == 0 && row<maze.length-1 && maze[row+1][col]==0)) {
+        return false;
+    }
+    return true;
+}
+
+function moveghost(ghost) {
+    switch (ghost.direction.act) {
+            case 'left':
+                left(ghost.position, ghost.speed);
+                break;
+            case 'right':
+                right(ghost.position, ghost.speed);
+                break;
+            case 'up':
+                up(ghost.position, ghost.speed);
+                break;
+            case 'down':
+                down(ghost.position, ghost.speed);
+                break;
+        }
+}
+
+function setghostdirection(ghost) {
+    ghost.direction.pref = findghostpreferreddirection(ghost.position);
+
+    var l = tryleft(ghost.position);
+    var r = tryright(ghost.position);
+    var u = tryup(ghost.position);
+    var d = trydown(ghost.position);
+
+    var dirset = false;
+    var p = 0;
+    switch (ghost.direction.act) {
+        case 'left':
+            ghost.direction.act = getghostdirection(ghost.direction, l, !l&&!u&&!d && r, u, d);
+            break;
+        case 'right':
+            ghost.direction.act = getghostdirection(ghost.direction, !r&&!u&&!d && l, r, u, d);
+            break;
+        case 'up':
+            ghost.direction.act = getghostdirection(ghost.direction, l, r, u, !l&&!r&&!u && d);
+            break;
+        case 'down':
+            ghost.direction.act = getghostdirection(ghost.direction, l, r, !l&&!r&&!d && u, d);
+            break;
+    }
+}
+
+function getghostdirection(dir, l, r, u, d) {
+    var act = null;
+    var p = 0;
+    while (act==null && p < 4) {
+        switch (dir.pref[dir.favour[p]]) {
+            case 'left':
+                if (l) {
+                    act = 'left';
+                }
+                break;
+            case 'right':
+                if (r) {
+                    act = 'right';
+                }
+                break;
+            case 'up':
+                if (u) {
+                    act = 'up';
+                }
+                break;
+            case 'down':
+                if (d) {
+                    act = 'down';
+                }
+                break;
+        }
+        p++;
+    }
+    return act;
+}
+
+function findghostpreferreddirection(pos) {
+    delta = { row: pos.row - pac.position.row, col: pos.col - pac.position.col};
+    var pref = [null, null, null, null];
+
+    // top left
+    if (delta.row >= 0 && delta.col >= 0) {
+        if (Math.abs(delta.row) <= Math.abs(delta.col)) {
+            pref[0] = 'left';
+            pref[1] = 'up';
+            pref[2] = 'down';
+            pref[3] = 'right';
+        } else {
+            pref[0] = 'up';
+            pref[1] = 'left';
+            pref[2] = 'right';
+            pref[3] = 'down';
+        }
+        return pref;
+    }
+    // top right
+    if (delta.row >= 0 && delta.col <= 0) {
+        if (Math.abs(delta.row) <= Math.abs(delta.col)) {
+            pref[0] = 'right';
+            pref[1] = 'up';
+            pref[2] = 'down';
+            pref[3] = 'left';
+        } else {
+            pref[0] = 'up';
+            pref[1] = 'right';
+            pref[2] = 'left';
+            pref[3] = 'down';
+        }
+        return pref;
+    }
+    // bottom left
+    if (delta.row <= 0 && delta.col >= 0) {
+        if (Math.abs(delta.row) <= Math.abs(delta.col)) {
+            pref[0] = 'left';
+            pref[1] = 'down';
+            pref[2] = 'up';
+            pref[3] = 'right';
+        } else {
+            pref[0] = 'down';
+            pref[1] = 'left';
+            pref[2] = 'right';
+            pref[3] = 'up';
+        }
+        return pref;
+    }
+    // bottom right
+    if (delta.row <= 0 && delta.col <= 0) {
+        if (Math.abs(delta.row) <= Math.abs(delta.col)) {
+            pref[0] = 'right';
+            pref[1] = 'down';
+            pref[2] = 'up';
+            pref[3] = 'left';
+        } else {
+            pref[0] = 'down';
+            pref[1] = 'right';
+            pref[2] = 'left';
+            pref[3] = 'up';
+        }
+        return pref;
+    }
+    return pref;
+}
+
+
+function render() {
+    content = '';
+    for (i=0; i<maze.length; i++) {
+        content += '<div class="pc_row">'
+        for (j=0; j<maze[i].length; j++) {
+            if (maze[i][j] == 0) {
+                content += '<div class="pc_node" id="r' + i + 'c' + j + '">';
+                content += '<div class="w" style="';
+                var t = i!=0;
+                var b = i!=maze.length - 1;
+                var l = j!=0;
+                var r = j!=maze[i].length - 1;
+                
+                if (t && l && maze[i-1][j]!=0 && maze[i-1][j-1]!=0 && maze[i][j-1]!=0) {
+                    content += 'border-top-left-radius:50%;'
+                }
+                if (t && r && maze[i-1][j]!=0 && maze[i-1][j+1]!=0 && maze[i][j+1]!=0) {
+                    content += 'border-top-right-radius:50%;'
+                }
+                if (b && l && maze[i+1][j]!=0 && maze[i+1][j-1]!=0 && maze[i][j-1]!=0) {
+                    content += 'border-bottom-left-radius:50%;'
+                }
+                if (b && r && maze[i+1][j]!=0 && maze[i+1][j+1]!=0 && maze[i][j+1]!=0) {
+                    content += 'border-bottom-right-radius:50%;'
+                }
+                
+                content += '"/>';
+                var n = false;
+                var s = false;
+                var w = false;
+                var e = false;
+                // north
+                if (i==0 || maze[i-1][j]==0) {
+                    content += '<div class="w_n"/>'
+                    n = true;
+                }
+                // south
+                if (i==maze.length-1 || maze[i+1][j]==0) {
+                    content += '<div class="w_s"/>'
+                    s = true;
+                }
+                // west
+                if (j==0 || maze[i][j-1]==0) {
+                    content += '<div class="w_w"/>'
+                    w = true;
+                }
+                // east
+                if (j==maze[i].length-1 || maze[i][j+1]==0) {
+                    content += '<div class="w_e"/>'
+                    e = true;
+                }
+                // nw
+                if (n && w && (i==0 || j==0 || maze[i-1][j-1]==0)) {
+                    content += '<div class="w_nw"/>'
+                }
+                // ne
+                if (n && e && (i==0 || j==maze[i].length-1 || maze[i-1][j+1]==0)) {
+                    content += '<div class="w_ne"/>'
+                }
+                // sw
+                if (s && w && (i==maze.length-1 || j==0 || maze[i+1][j-1]==0)) {
+                    content += '<div class="w_sw"/>'
+                }
+                // se
+                if (s && e && (i==maze.length-1 || j==maze[i].length-1 || maze[i+1][j+1]==0)) {
+                    content += '<div class="w_se"/>'
+                }
+                
+                content += '</div>';
+            } else if (maze[i][j] == 1) {
+                content += '<div class="pc_node" id="r' + i + 'c' + j + '"></div>'
+            } else if (maze[i][j] == 2) {
+                content += '<div class="pc_node" id="r' + i + 'c' + j + '"><div class="pc_dot"></div></div>'
+                dotsnumber++;
+            }
+        }
+        content += '</div>'
+    }
+    content += '<div id="pac" class="pc_pac" style="top:' + pac.position.row + 'px;left:' + pac.position.col + 'px;"/>';
+    ghosts.forEach(function(ghost, index) {
+        content += '<div id="ghost'+index+'" class="pc_ghost pc_g' + index + '" style="top:' + ghost.position.row + 'px;left:' + ghost.position.col + 'px;"/>';
+    });
+    return content;
+}
+

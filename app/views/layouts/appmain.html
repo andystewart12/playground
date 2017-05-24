@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+    <head>
+        <meta charset="utf-8">
+        <title>Thing</title>
+        <link rel="stylesheet" href="foundation.css">
+        <link rel="stylesheet" href="font-awesome.css">
+        <link rel="stylesheet" href="styles.css">
+        <script src="ext/jquery-3.1.1.min.js"></script>
+    </head>
+    <body>
+        <script>
+            var selection = '{{ model.topbarselect }}';
+            $(document).ready(function() {
+                $('#' + selection).addClass('active');
+                
+            });
+            
+        </script>
+        <div class="top-bar">
+            <div class="row">
+                <div class="top-bar-left">
+                    <ul class="dropdown menu" data-dropdown-menu>
+                        <li id="home"><a href="/home">Home</a></li>
+                        <li id="test"><a href="/test">Test</a></li>
+                        <li id="pacman"><a href="/pacman">Pacman</a></li>
+                    </ul>
+                </div>
+                <div class="top-bar-right">
+                    <ul class="dropdown menu" data-dropdown-menu>
+                        <li id="logout"><a href="/logout">Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {{{body}}}
+    </body>
+</html>

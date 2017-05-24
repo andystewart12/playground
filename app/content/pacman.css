@@ -1,0 +1,153 @@
+.pc_container {
+    width: auto;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    
+    z-index: 1;
+}
+
+.pc_frame {
+    outline: 2px solid gold;
+    width:500px;
+    overflow: hidden;
+    height:auto;
+    display: block;
+    position:relative;
+    background-color: black;
+    
+}
+
+.pc_row {
+    height: 20px;
+}
+
+.pc_node {
+    height: 20px;
+    width: 20px;
+    display: table-cell;
+    background-color: inherit;
+    vertical-align: middle;
+}
+
+.pc_dot {
+
+    width: 5px;
+    height: 5px;
+    display: block;
+    margin: auto;
+    background-color: gold;
+    border-radius: 50%;
+}
+
+.pc_pac {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-color: gold;
+    border-radius: 50%;
+    z-index: 3;
+}
+
+.pc_ghost {
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    z-index: 2;
+}
+
+.pc_g0 {
+    background-color: firebrick;
+}
+.pc_g1 {
+    background-color: aqua;
+}
+.pc_g2 {
+    background-color: orange;
+}
+.pc_g3 {
+    background-color: pink;
+}
+.pc_stopbutton {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.w {
+    background-color: steelblue;
+    width: 10px;
+    height: 10px;
+    margin: 5px 5px 5px 5px;
+    z-index: 1;
+    position: relative;
+}
+
+.w_n {
+    background-color: steelblue;
+    width: 10px;
+    height: 5px;
+    margin: -20px 0px 0px 5px;
+    z-index: 1;
+    position: absolute;
+}
+.w_s {
+    background-color: steelblue;
+    width: 10px;
+    height: 5px;
+    margin: -5px 0px 0px 5px;
+    z-index: 1;
+    position: absolute;
+}
+.w_w {
+    background-color: steelblue;
+    width: 5px;
+    height: 10px;
+    z-index: 1;
+    margin: -15px 0px 0px 0px;
+    position: absolute;
+
+}
+.w_e{
+    background-color: steelblue;
+    width: 5px;
+    height: 10px;
+    z-index: 1;
+    margin: -15px 0px 0px 15px;
+    position: absolute;
+}
+
+.w_nw {
+    background-color: steelblue;
+    width: 5px;
+    height: 5px;
+    z-index: 1;
+    margin: -20px 0px 0px 0px;
+    position: absolute;
+}
+.w_ne {
+    background-color: steelblue;
+    width: 5px;
+    height: 5px;
+    z-index: 1;
+    margin: -20px 0px 0px 15px;
+    position: absolute;
+}
+.w_sw {
+    background-color: steelblue;
+    width: 5px;
+    height: 5px;
+    z-index: 1;
+    margin: -5px 0px 0px 0px;
+    position: absolute;
+}
+.w_se {
+    background-color: steelblue;
+    width: 5px;
+    height: 5px;
+    z-index: 1;
+    margin: -5px 0px 0px 15px;
+    position: absolute;
+}
