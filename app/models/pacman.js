@@ -102,7 +102,10 @@ function gameloop() {
     ghosts.forEach(function(ghost) {
         setghostdirection(ghost);
         moveghost(ghost);
-        if (Math.abs(pac.position.row - ghost.position.row) < 20 && Math.abs(pac.position.col - ghost.position.col) < 20) {
+        var rowcol = Math.abs(pac.position.row - ghost.position.row);
+        var colcol = Math.abs(pac.position.col - ghost.position.col);
+        
+        if (rowcol < 20 && colcol < 20 && (rowcol < 16 && colcol < 16)) {
             collision = true;
         }
     });
