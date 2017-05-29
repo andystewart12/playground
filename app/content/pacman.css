@@ -41,6 +41,11 @@
     border-radius: 50%;
 }
 
+.pc_powerup {
+    width: 10px;
+    height: 10px;
+}
+
 .pc_pac {
     width: 20px;
     height: 20px;
@@ -59,18 +64,6 @@
     z-index: 2;
 }
 
-.pc_g0 {
-    background-color: firebrick;
-}
-.pc_g1 {
-    background-color: aqua;
-}
-.pc_g2 {
-    background-color: orange;
-}
-.pc_g3 {
-    background-color: pink;
-}
 .pc_stopbutton {
     display: block;
     margin-left: auto;
