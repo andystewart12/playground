@@ -7,8 +7,9 @@
         <link rel="stylesheet" href="font-awesome.css">
         <link rel="stylesheet" href="styles.css">
         <script src="ext/jquery-3.1.1.min.js"></script>
+        <script src="script.js"></script>
     </head>
-    <body>
+    <body class="appmain">
         <script>
             var selection = '{{ model.topbarselect }}';
             $(document).ready(function() {
@@ -18,21 +19,30 @@
             
         </script>
         <div class="top-bar">
-            <div class="row">
-                <div class="top-bar-left">
+            <div class="row" style="position:relative;">
+                <div class="top-bar-left top-bar-header" id="topbarcontent">
                     <ul class="dropdown menu" data-dropdown-menu>
-                        <li id="home"><a href="/home">Home</a></li>
-                        <li id="test"><a href="/test">Test</a></li>
-                        <li id="pacman"><a href="/pacman">Pacman</a></li>
+                        <li id="side"><a href="javascript:void(0)" onclick="toggleNav()"><i id="brandicon" class="fa fa-lg fa-chevron-circle-right" aria-hidden="true"></i> &nbsp andostew.com</a></li>
                     </ul>
                 </div>
-                <div class="top-bar-right">
-                    <ul class="dropdown menu" data-dropdown-menu>
-                        <li id="logout"><a href="/logout">Log out</a></li>
+                <div class="top-bar-right righticons">
+                    <ul class="dropdown menu righticons" data-dropdown-menu>
+                        <li><a href="/home"><i class="fa fa-lg fa-home" aria-hidden="true"></i></a></li>
+                        <li><a href="/logout"><i class="fa fa-lg fa-sign-out" aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
             </div>
         </div>
+
+        <div id="sidenav" class="sidenav">
+            <a id="home" href="/home"><i class="fa fa-home" aria-hidden="true"></i>&nbsp Home</a>
+            <a id="games" href="javascript:void(0)" onclick="togglesubmenu('gamestag', 'gameslist')"><i class="fa fa-gamepad" aria-hidden="true"></i>&nbsp Games</a>
+            <div id="gameslist" class="submenu">
+                <a id="pacman" href="/pacman">Pacman</a>
+            </div>
+            <a id="test" href="/test"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp Test</a>
+        </div>
+
         {{{body}}}
     </body>
 </html>

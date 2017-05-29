@@ -1,42 +1,125 @@
+:root{
+    --denim: #1a2930;
+    --teal: #028090;
+    --navy: #2a2634;
+    --yellow: #f9dc5c;
+    --grey: #e8e9eb;
+
+    --sunflowers: #ffce00;
+    --starrynight: #0375b4;
+    --irises: #007849;
+    --evening: #262228;
+    --aluminium: #d9d9d9;
+    --tangerine: #f19f4d;
+    --light: #f9cf00;
+    --cerulean: #4484ce;
+
+}
+
+body.appmain {
+  background-color: var(--aluminium);
+}
+
 /* Top bar - override foundation css */
 .top-bar,
 .top-bar ul {
-  background-color: whitesmoke;
+  background-color: var(--starrynight);
 }
 .top-bar {
-  padding: 0;
+  padding: 1px;
+  height: 45px;
 }
-#mobileTopNav {
-  margin-left: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-#mobileTopNav li {
-  list-style: none;
-  padding: 0.4rem;
-}
+
 .menu > li > a {
   padding-top: .9rem;
-  padding-bottom: .9rem;
+  padding-bottom: 0.5em;
   padding-left: 1.25rem;
   padding-right: 1.35rem;
-  color: black;
+  color: white;
   
-  font-size: 90%;
-  border-bottom: 2px solid whitesmoke;
+  font-size: 95%;
 }
 .menu > li > a:hover {
-  background-color: #eaeaea;
-  color: #000000;
-  border-bottom: 2px solid steelblue;
+  color: var(--aluminium);
 }
 .menu .active > a {
-  background: whitesmoke;
-  border-bottom: 2px solid steelblue;
-  color: black;
+  color: var(--irises);
 }
 
 .top-bar {
-  -webkit-box-shadow: 0 2px 4px 0 #c8c8c8;
-  -moz-box-shadow: 0 2px 4px 0 #c8c8c8;
-  box-shadow: 0 2px 4px 0 #c8c8c8;
+  -webkit-box-shadow: 0 -1px 8px 0 var(--denim);
+  -moz-box-shadow: 0 -1px 8px 0 var(--denim);
+  box-shadow: 0 -1px 8px 0 var(--denim);
+}
+
+.top-bar-header {
+  transition: 0.5s;
+  position: absolute;
+  font-weight: bold;
+  left: 0px;
+}
+
+.righticons > li> a > .fa {
+  width: 10px;
+  height: inherit;
+}
+.righticons {
+  margin-right: 5%;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  background-color: var(--evening);
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+  white-space: nowrap;
+  -webkit-box-shadow: 5px 0px 6px 0 var(--denim);
+  -moz-box-shadow: 5px 0px 6px 0 var(--denim);
+  box-shadow: 5px 0px 6px 0 var(--denim);
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 35px;
+  text-decoration: none;
+  font-size: 24px;
+  color: var(--aluminium);
+  display: block;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: var(--light)!important;
+}
+
+.sidenav a > .fa {
+  width: 40px;
+}
+
+.sidenav a.active {
+  color: var(--tangerine);
+}
+
+.submenu {
+  margin-left: 60px;
+  display: none;
+}
+
+.submenu > a {
+  font-size: 18px;
+  font-weight: normal;
+  padding-top: 0px;
+}
+.submenu > a:hover {
+  color: var(--light);
+  cursor: pointer;
 }
